@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-4 order-md-2 mb-4">
+            <div class="sticky-top" style="top: 1em">
+                {{>cart}}
+            </div>
+        </div>
+        <div class="col-md-4 offset-2 order-md-1">
+        <h1>Checkout</h1>
+        {{#if order.items}}
+            {{#if user}}
+                {{>paymentform}}
+            {{else}}
+                {{>loginform}}
+                <hr>
+                Don't have an account? <a href="/signup">Create one for free!</a>
+            {{/if}}
+        {{else}}
+            <h1>Your order is empty.</h1>
+        {{/if}}
+        </div>
+    </div>
+</div>
+
+{{#section 'script'}}
+<script type="text/javascript">
+$(document).ready(function () {
+    $("#passwordField").css('display', 'none');
+
+    $('#save-info').change(function(e){
+        if ($(this).is(':checked')) {
+            $('#password').attr('required', true);
+            $("#passwordField").css('display','block');
+        } else if (!$(this).is(':checked')) {
+            console.log($(this).is(':checked'))
+            $('#password').attr('required', false);
+            $("#passwordField").css('display','none');
+        }
+    });
+});
+</script>
+{{/section}}

@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-6 mx-auto ">
+        <h1>Add new food truck</h1>
+        <form method="POST" action="/api/trucks" class="needs-validation no-gutters" novalidate="">
+            <div class="form-group row">
+                <label for="truck_name" class="form-label">Truck name</label>
+                <input type="text" class="form-control" id="truck_name" name="truckName" required>
+                <div class="invalid-feedback">
+                    Please provide a name for your food truck.
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="truck_phone" class="form-label">Phone number</label>
+                <input type="text" class="form-control" id="truck_phone" name="truckPhone" required>
+                <div class="invalid-feedback">
+                    Please provide a valid phone number.
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="truck_street" class="form-label">Street address</label>
+                <input type="text" class="form-control" id="truck_street" name="truckStreet" required>
+                <div class="invalid-feedback">
+                    Please provide your current location.
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="truck_city" class="form-label">City</label>
+                    <input type="text" class="form-control" id="truck_city" name="truckCity" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid city.
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <label for="state">State</label>
+                    <select class="custom-select d-block w-100" id="truck_state" name="truckState" required="">
+                        <option value="">Choose...</option>
+                        <option>California</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please provide a valid state.
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <label for="truck_street" class="form-label">Postal code</label>
+                    <input type="text" class="form-control" id="truck_postal" name="truckPostal" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid postal code.
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success float-right"><i class="fa fa-save"></i> Save</button>
+            <a href="/" class="btn btn-danger btn-outline float-right mr-3"><i class="fa fa-chevron-left"></i>
+                Cancel</a>
+        </form>
+    </div>
+</div>

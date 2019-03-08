@@ -1,0 +1,29 @@
+<div>
+    <a href="/api/trucks/create" class="btn btn-primary float-left mb-3"><i class="fa fa-plus"></i> Add new</a>
+</div>
+<div class="table-responsive">
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Orders</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each trucks}}
+            <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.street}}, {{this.city}}, {{this.state}}, {{this.postalcode}}</td>
+                <td>{{this.orders.length}}</td>
+                <td>
+                    <a href="/trucks/{{this.id}}/update"><i class="fa fa-pencil-alt mr-3"></i></a>
+                    <a href="/trucks/{{this.id}}"><i class="fa fa-eye-o mr-3"></i></a>
+                    <a href="/trucks/{{this.id}}/delete"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

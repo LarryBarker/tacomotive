@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8 mx-auto">
+            <h1>You're in luck!</h1>
+            <h5>Here's what we found in your area...</h5>
+            <hr>
+
+            {{#each trucks}}
+            <div class="mb-4 mx-auto">
+              <a href="/trucks/{{this.id}}" class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{this.name}}</div>
+                      <div class="text-xs font-weight-bold text-muted text-uppercase mb-1">
+                        {{#if this.location.address1}}
+                        {{this.location.address1}}<br>
+                        {{/if}}
+                        {{#if this.phone}}
+                        {{phoneNumber this.phone}}
+                        {{/if}}
+                      </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800 align-text-bottom">{{this.price}}</div>
+                    </div>
+                    <div class="col-auto">
+                        {{#unless this.is_closed}}
+                        <span class="badge badge-pill badge-success mb-5"> OPEN NOW</span>
+                        {{/unless}}
+                        <h5>{{this.rating}}
+                        <i class="fas fa-star icon-d"></i></h5>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {{else}}
+            <p>No trucks found :(</p>
+            {{/each}}
+        </div>
+    </div>
+</div>

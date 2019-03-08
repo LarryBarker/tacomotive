@@ -1,0 +1,92 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-8 mx-auto">
+            <h1>{{ truck.name }}<h1>
+            <h5 class="text-muted">{{ truck.location.address1 }}</h5>
+            <h5 class="text-muted">{{phoneNumber truck.phone }}</h5>
+            <hr>
+
+            {{#each menu}}
+                <div class="col-12 mt-4">
+                    <h3 class="text-center">{{this._id}}</h3>
+                    <hr class="accent mb-3">
+                </div>
+                <div class="card-columns">
+                {{#each this.items}}
+                    <div class="card card-body" data-toggle="modal" data-type="../_id" data-target="#addItemModal"
+                        data-item="{{this.name}}" data-price="{{this.price}}"
+                        data-item-id="{{this._id}}" data-desc="{{this.description}}">
+                        <span class="float-right font-weight-bold">${{this.price}}</span>
+                        <h6 class="text-truncate">{{this.name}}</h6>
+                        <p class="small">{{this.description}}</p>
+                    </div>
+                {{/each}}
+                </div>
+            {{/each}}
+
+        </div>
+        <div class="col-md-4 order-md-2 mb-4">
+            <div class="sticky-top" style="top: 1em">
+                {{>cart}}
+                {{#if order.items}}
+                <a href="/checkout" class="btn btn-secondary btn-block py-2">Checkout</a>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="itemName">Add item</h5>
+                <span class="item-price" id="itemPrice"></span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="text-muted item-description">Description</h5>
+                <form method="POST" action="/orders/items">
+                    <input type="hidden" name="_item">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Quantity</label>
+                        <input type="number" value="1" min="1" class="form-control" name="itemQuantity">
+                    </div>
+                    <div class="form-group float-right">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="onButtonAddItem">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{#section 'script'}}
+<script>
+    $(document).ready(function () {
+        $('#addItemModal').on('show.bs.modal', function (event) {
+            var qty = $("[name='itemQuantity']").val(1)
+
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var name = button.data('item') // Extract info from data-* attributes
+            var price = button.data('price') // Extract info from data-* attributes
+            var description = button.data('desc')
+            var itemId = button.data('item-id')
+
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.modal-title').text('Add ' + name + ' - ')
+            modal.find('.item-price').text('$' + price)
+            modal.find('.item-description').text(description)
+
+            $("[name='_item']").val(itemId)
+
+
+        })
+    });
+</script>
+{{/section}}
